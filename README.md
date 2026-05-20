@@ -287,6 +287,8 @@ Descripción gráfica de los resultados obtenidos durante la práctica:
 *Figura 9-4. Resultado final de la práctica: aplicación frontend React contenerizada y funcional, comunicándose con el backend simulado.*
 
 ---
+Tambien añado el link de git de mi trabajo:https://github.com/carojas1/semana_7.git
+---
 
 ## 10. Bibliografía
 
