@@ -1,17 +1,17 @@
 <div align="center">
 
-# 🐳 Despliegue y Contenerización de un Frontend React con Docker
+#  Despliegue y Contenerización de un Frontend React con Docker
 ### Optimización de Caché de Capas en Imágenes Personalizadas
 
 ---
 
 | | |
 |---|---|
-| **👨‍💻 Autor** | Christian Andrés Rojas |
-| **📚 Materia** | Tendencias Tecnológicas |
-| **🎓 Nivel** | Cuarto Ciclo |
-| **🏫 Institución** | Instituto Tecnológico Sudamericano |
-| **📅 Práctica** | Laboratorio 06 — Contenerización de Aplicaciones Web |
+| ** Autor** | Christian Andrés Rojas |
+| ** Materia** | Tendencias Tecnológicas |
+| ** Nivel** | Cuarto Ciclo |
+| ** Institución** | Instituto Tecnológico Sudamericano |
+| ** Práctica** | semana_7|
 
 ---
 
@@ -82,7 +82,7 @@ Este sistema de capas tiene una implicación poderosa: **las capas son inmutable
 El paso más lento en la construcción de una imagen Node.js es invariablemente `npm install`, ya que descarga e instala todas las dependencias del proyecto desde la red. La optimización clave consiste en **separar la copia de los archivos de dependencias de la copia del código fuente**:
 
 ```dockerfile
-# ✅ Enfoque OPTIMIZADO
+#  Enfoque OPTIMIZADO
 COPY package.json package-lock.json ./   # Capa A
 RUN npm install                          # Capa B (costosa, ~2-3 min)
 COPY . .                                 # Capa C (solo código fuente)
@@ -91,7 +91,7 @@ COPY . .                                 # Capa C (solo código fuente)
 **¿Por qué funciona?** Docker invalida la caché de una capa solo cuando el contenido que la generó ha cambiado. Si únicamente se modifica el código fuente (archivos `.jsx`, `.css`, etc.) pero NO el `package.json`, Docker reutiliza las capas A y B desde la caché y solo regenera la capa C. El resultado: el siguiente build toma **segundos en lugar de minutos**.
 
 ```dockerfile
-# ❌ Enfoque SIN optimizar
+#  Enfoque SIN optimizar
 COPY . .                                 # Cualquier cambio en cualquier archivo...
 RUN npm install                          # ...obliga a reinstalar TODAS las dependencias
 ```
@@ -104,14 +104,14 @@ Esta distinción entre datos que cambian frecuentemente (código) y datos que ca
 
 Para llevar a cabo esta práctica satisfactoriamente, el estudiante debe tener dominio de los siguientes temas:
 
-- ✅ **Comandos básicos de Linux/terminal:** navegación con `cd`, `ls`, `mkdir`, `cat`, manejo de archivos y permisos de ejecución.
-- ✅ **Node.js y npm:** comprensión del archivo `package.json`, el directorio `node_modules` y el flujo de instalación de dependencias con `npm install`.
-- ✅ **React y Vite:** conocimiento básico de la estructura de un proyecto frontend moderno, scripts de inicio (`npm start`) y proceso de build.
-- ✅ **Git y GitHub:** clonación de repositorios con `git clone`, uso básico de ramas y commits.
-- ✅ **Conceptos de redes locales:** comprensión de `localhost`, puertos TCP, y la diferencia entre el sistema host y un contenedor.
-- ✅ **Docker CLI fundamental:** familiaridad con los conceptos de imagen, contenedor, y los comandos `docker build`, `docker run`, `docker ps` y `docker stop`.
-- ✅ **Variables de entorno:** comprensión de `.env` files y cómo las aplicaciones consumen configuración externa.
-- ✅ **Arquitectura cliente-servidor:** comprensión de cómo un frontend consume endpoints de una API REST.
+-  **Comandos básicos de Linux/terminal:** navegación con `cd`, `ls`, `mkdir`, `cat`, manejo de archivos y permisos de ejecución.
+-  **Node.js y npm:** comprensión del archivo `package.json`, el directorio `node_modules` y el flujo de instalación de dependencias con `npm install`.
+-  **React y Vite:** conocimiento básico de la estructura de un proyecto frontend moderno, scripts de inicio (`npm start`) y proceso de build.
+-  **Git y GitHub:** clonación de repositorios con `git clone`, uso básico de ramas y commits.
+-  **Conceptos de redes locales:** comprensión de `localhost`, puertos TCP, y la diferencia entre el sistema host y un contenedor.
+-  **Docker CLI fundamental:** familiaridad con los conceptos de imagen, contenedor, y los comandos `docker build`, `docker run`, `docker ps` y `docker stop`.
+-  **Variables de entorno:** comprensión de `.env` files y cómo las aplicaciones consumen configuración externa.
+-  **Arquitectura cliente-servidor:** comprensión de cómo un frontend consume endpoints de una API REST.
 
 ---
 
@@ -161,23 +161,23 @@ Para llevar a cabo esta práctica satisfactoriamente, el estudiante debe tener d
 
 ### Documentación Oficial
 
-- 📖 [Documentación oficial de Docker](https://docs.docker.com/) — Referencia completa de comandos, Dockerfile y Docker Compose.
-- 📖 [Referencia de Dockerfile](https://docs.docker.com/engine/reference/builder/) — Especificación de cada instrucción disponible.
-- 📖 [Docker Hub — Imagen node:18-alpine](https://hub.docker.com/_/node) — Página oficial de la imagen base utilizada.
-- 📖 [Documentación de Vite](https://vitejs.dev/guide/) — Guía oficial del bundler utilizado en el proyecto.
-- 📖 [React Documentation](https://react.dev/) — Documentación oficial del framework de frontend.
+- [Documentación oficial de Docker](https://docs.docker.com/) — Referencia completa de comandos, Dockerfile y Docker Compose.
+- [Referencia de Dockerfile](https://docs.docker.com/engine/reference/builder/) — Especificación de cada instrucción disponible.
+- [Docker Hub — Imagen node:18-alpine](https://hub.docker.com/_/node) — Página oficial de la imagen base utilizada.
+- [Documentación de Vite](https://vitejs.dev/guide/) — Guía oficial del bundler utilizado en el proyecto.
+- [React Documentation](https://react.dev/) — Documentación oficial del framework de frontend.
 
 ### Repositorios del Proyecto
 
-- 🔗 **Backend simulado (mockAPI):** `https://github.com/<organización>/mockAPI`
-- 🔗 **Frontend React (suda-frontend-s6):** `https://github.com/<organización>/suda-frontend-s6`
+-  **Backend simulado (mockAPI):** `https://github.com/<organización>/mockAPI`
+-  **Frontend React (suda-frontend-s6):** `https://github.com/<organización>/suda-frontend-s6`
 
-> ⚠️ *Reemplaza `<organización>` con la URL real proporcionada por el docente.*
+>  *Reemplaza `<organización>` con la URL real proporcionada por el docente.*
 
 ### Recursos Adicionales
 
-- 📹 [Play with Docker](https://labs.play-with-docker.com/) — Entorno Docker en el navegador para practicar sin instalación local.
-- 📹 [Docker — Documentación de Best Practices para Dockerfile](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+-  [Play with Docker](https://labs.play-with-docker.com/) — Entorno Docker en el navegador para practicar sin instalación local.
+-  [Docker — Documentación de Best Practices para Dockerfile](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
 ---
 
@@ -195,7 +195,7 @@ git clone https://github.com/<organización>/mockAPI.git
 git clone https://github.com/<organización>/suda-frontend-s6.git
 ```
 
-> 💡 Asegúrate de que ambas carpetas queden en el mismo directorio raíz para facilitar la navegación.
+>  Asegúrate de que ambas carpetas queden en el mismo directorio raíz para facilitar la navegación.
 
 ---
 
@@ -251,7 +251,7 @@ README.md
 Thumbs.db
 ```
 
-> 💡 **¿Por qué excluir `node_modules`?** Esta carpeta puede contener miles de archivos y pesar varios cientos de MB. No tiene sentido copiarla a la imagen porque el `Dockerfile` ejecutará `npm install` dentro del contenedor y generará su propia `node_modules` limpia y compatible con la arquitectura del contenedor.
+>  **¿Por qué excluir `node_modules`?** Esta carpeta puede contener miles de archivos y pesar varios cientos de MB. No tiene sentido copiarla a la imagen porque el `Dockerfile` ejecutará `npm install` dentro del contenedor y generará su propia `node_modules` limpia y compatible con la arquitectura del contenedor.
 
 ---
 
@@ -343,7 +343,7 @@ docker build -t sudafront .
  => => naming to docker.io/library/sudafront
 ```
 
-> 💡 En el **segundo build** (si solo cambias código fuente), notarás que los pasos 3 y 4 muestran `CACHED` — esa es la optimización de caché funcionando.
+>  En el **segundo build** (si solo cambias código fuente), notarás que los pasos 3 y 4 muestran `CACHED` — esa es la optimización de caché funcionando.
 
 ---
 
